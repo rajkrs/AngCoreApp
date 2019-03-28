@@ -1,0 +1,105 @@
+
+
+<select>
+  <option *ngFor="let contact of helplines" value="{{helplines}}">
+    {{contact}}
+  </option>
+</select>
+
+
+
+
+<div class="loginwrap">
+  <div class="loginbox">
+    <div class="login">
+      <div class="mainbox col-md-5">
+        <div class="panel">
+          <div id="loginbox" class="loginboxCon">
+            <form name="userLogin" (ngSubmit)="login(userLogin)" #loginform="ngForm" novalidate>
+              <div class="heatitle">
+                Log in to your account
+              </div>
+              <div class="formbox">
+                <div class="inputbox">
+                  <div class="form-group">
+                    <input autocomplete="email" pattern=".*^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$.*" required title="This field is required" [(ngModel)]="userLogin.userName" class="form-control email" id="login-email" type="email" name="email" #email="ngModel" placeholder="Please enter your email id">
+                    <div [hidden]="email.valid || email.pristine" class="spotFormCss alert-danger">
+                      Invalid email.
+                    </div>
+                  </div>
+                  <div class="form-group" class="form-group" [ngClass]="{ 'has-error': loginform.submitted && !password.valid }">
+                    <input autocomplete="current-password" required pattern=".*^[a-z0-9A-Z~!@#$%^&*(),.]{6,}$.*" type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="userLogin.password" #password="ngModel" />
+                    <div [hidden]="password.valid || password.pristine" class="spotFormCss alert-danger">
+                      Invalid password.
+                    </div>
+                    <!-- <div *ngIf="!password.valid" class="help-block">Invalid password.</div> -->
+                  </div>
+                  <p class="forgotpassword text-right"><a (click)="openModal('custom-modal-3')" id="forgotpasswoordboxshow">Forgot your password</a></p>
+                  <div class="form-group">
+                    <span *ngIf="signupErrorMsg" style="text-align: center;color: #a94442">{{signupErrorMsg}}</span>
+                    <span *ngIf="signupSucsMsg" style="text-align: center;color: #28a745">{{signupSucsMsg}}</span>
+
+                    <div *ngIf="callApi" class="loaderCntr"><div class="lds-hourglass"></div></div>
+                    <button type="submit" class="btn btn-primary signin" [disabled]="!loginform.form.valid">Login <span class="arrowbtn"><span class="fa fa-arrow-right"></span></span></button>
+                  </div>
+                </div>
+                <div class="registerrow text-center">Don't have an account ? <a (click)="openModal('custom-modal-2');loginform.resetForm();" id="signupboxmodel">Register here !</a></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="!userInfoRes" class="help-block">
+  {{userInfoRes}}
+</div>
+
+
+<!--
+<div class="loginwrap">
+  <div class="loginbox">
+    <div class="login">
+      <div class="mainbox col-md-5">
+        <div class="panel">
+          <div id="loginbox" class="loginboxCon">
+            <form name="userLogin" (ngSubmit)="login(userLogin)" #loginform="ngForm" novalidate>
+              <div class="heatitle">
+                Log in to your account
+              </div>
+              <div class="formbox">
+                <div class="inputbox">
+                  <div class="form-group">
+                    <input autocomplete="email" pattern=".*^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$.*" required title="This field is required" [(ngModel)]="userLogin.userName" class="form-control email" id="login-email" type="email" name="email" #email="ngModel" placeholder="Please enter your email id">
+                    <div [hidden]="email.valid || email.pristine" class="spotFormCss alert-danger">
+                      Invalid email.
+                    </div>
+                  </div>
+                  <div class="form-group" class="form-group" [ngClass]="{ 'has-error': loginform.submitted && !password.valid }">
+                    <input autocomplete="current-password" required pattern=".*^[a-z0-9A-Z~!@#$%^&*(),.]{6,}$.*" type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="userLogin.password" #password="ngModel" />
+                    <div [hidden]="password.valid || password.pristine" class="spotFormCss alert-danger">
+                      Invalid password.
+                    </div>
+                  </div>
+                  <p class="forgotpassword text-right"><a (click)="openModal('custom-modal-3')" id="forgotpasswoordboxshow">Forgot your password</a></p>
+                  <div class="form-group">
+                    <span *ngIf="signupErrorMsg" style="text-align: center;color: #a94442">{{signupErrorMsg}}</span>
+                    <span *ngIf="signupSucsMsg" style="text-align: center;color: #28a745">{{signupSucsMsg}}</span>
+
+                    <div *ngIf="callApi" class="loaderCntr"><div class="lds-hourglass"></div></div>
+                    <button type="submit" class="btn btn-primary signin" [disabled]="!loginform.form.valid">Login <span class="arrowbtn"><span class="fa fa-arrow-right"></span></span></button>
+                  </div>
+                </div>
+                <div class="registerrow text-center">Don't have an account ? <a (click)="openModal('custom-modal-2');loginform.resetForm();" id="signupboxmodel">Register here !</a></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
